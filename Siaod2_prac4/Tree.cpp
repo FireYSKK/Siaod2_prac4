@@ -79,17 +79,20 @@ BST* BST::deleteItem(BST* root, int lic)
 
     // Два потомка
     else {
-        BST* parent = root;
-
-        // Ищем потомка
-        BST* child = root->left;
+        // Ищем узел для переноса
+        BST* child;
+        child = root->left;
         while (child->right) {
-            parent = child;
             child = child->right;
         }
 
-        child->setRight(root->right);
-        return root->left;
+        // Перенос крайнего узла на место удаляемого
+        root->license = child->license;
+        root->fileIndex = child->fileIndex;
+
+        // Удаляем перенесенный узел
+        root->left = deleteItem(root->left, child->license);
+        return root;
     }
 }
 

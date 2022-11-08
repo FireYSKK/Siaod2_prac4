@@ -15,7 +15,7 @@ void operator<<(ostream& stream, const record r) {
 int main() {
     // Бинарное дерево поиска (обычное)
      
-    /*/BST* b = new BST(), * binTree = nullptr;
+    BST* binTree = nullptr;
     BF binFile = BF("file15.bin");
     int fileIndex = 0;
     ifstream fin("file15.bin", ios::binary | ios::in);
@@ -24,7 +24,7 @@ int main() {
         fin.read((char*)&rec, sizeof(record));
         if (!rec.empty) {
             if (fileIndex == 0) {
-                binTree = b->insertItem(binTree, rec.license, fileIndex);
+                binTree = (new BST())->insertItem(binTree, rec.license, fileIndex);
             }
             else {
                 binTree->insertItem(binTree, rec.license, fileIndex);
@@ -39,11 +39,11 @@ int main() {
     cout << "----------------------------------" << endl;
     binTree->display(0, binTree);
     
-    cout << binFile.findRecord(1799968149, binTree);*/
+    cout << binFile.findRecord(1799968149, binTree);
 
 
     // АВЛ дерево
-    AVLTree* avltree = new AVLTree();
+    /*AVLTree* avltree = new AVLTree();
     BF binFile = BF("file15.bin");
     int fileIndex = 0;
     ifstream fin("file15.bin", ios::binary | ios::in);
@@ -65,7 +65,7 @@ int main() {
     cout << "----------------------------------" << endl;
 
     avltree = avltree->deleteNode(1200446723, avltree);
-    avltree->display(0, avltree);
+    avltree->display(0, avltree);*/
 
 	return 0;
 }
