@@ -7,12 +7,6 @@ BST::BST(int lic, int indx) {
 	this->fileIndex = indx;
 }
 
-BST::BST(int lic, int indx, BST* head) {
-	this->license = lic;
-	this->fileIndex = indx;
-	this->head = head;
-}
-
 BST* BST::insertItem(BST* root, int license, int fileIndex) {
 	// Добавление корня
 	if (!root) {

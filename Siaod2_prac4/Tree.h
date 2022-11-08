@@ -6,7 +6,6 @@
 class BST {
 	int license;
 	int fileIndex;
-	BST* head = nullptr;
 
 	BST* left = nullptr;
 	BST* right = nullptr;
@@ -14,13 +13,9 @@ public:
 
 	BST();
 	BST(int lic, int indx);
-	BST(int lic, int indx, BST* head);
 
 	int getIndex() {
 		return this->fileIndex;
-	}
-	BST* getHead() {
-		return this->head;
 	}
 	void setRight(BST* right) {
 		this->right = right;
