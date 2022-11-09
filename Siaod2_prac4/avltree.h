@@ -22,9 +22,17 @@ struct Node
 class AVLTree {
     Node* root = nullptr;
     int height = 1;
+
+    static int rotations;
 public:
+    int getRotations() {
+        return this->rotations;
+    }
+
     // Возвращает root->license
     int getValue();
+    // Возвращает root->fileIndex
+    int getIndex();
     // Вычисление баланса узла
     int getBalance(AVLTree* next);
     // Правый поворот относительно узла у
@@ -33,6 +41,8 @@ public:
     AVLTree* leftRotate(AVLTree* x);
     // Добавление узла в дерево
     AVLTree* addNode(int license, int fileIndex, AVLTree* next = nullptr);
+    // Поиск элемента в дереве
+    AVLTree* findNode(int key, AVLTree* next);
     // Удаление узла из дерева
     AVLTree* deleteNode(int key, AVLTree* next);
     // Вывод дерева (повернутым слева направо)

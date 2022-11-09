@@ -1,8 +1,14 @@
 #include "avltree.h"
 using namespace std;
 
+int AVLTree::rotations = 0;
+
 int AVLTree::getValue() {
     return this->root->license;
+}
+
+int AVLTree::getIndex() {
+    return this->root->fileIndex;
 }
 
 int AVLTree::getBalance(AVLTree* next)
@@ -33,6 +39,8 @@ AVLTree* AVLTree::rightRotate(AVLTree* y)
     x->height = 1 + max( ((x->root)->left) ? ((x->root)->left)->height : 0,
                             ((x->root)->right) ? ((x->root)->right)->height : 0);
 
+    rotations += 1;
+
     // Возврат нового корня 
     return x;
 }
@@ -51,6 +59,8 @@ AVLTree* AVLTree::leftRotate(AVLTree* x)
                         ((x->root)->right) ? ((x->root)->right)->height : 0);
     y->height = 1 + max(((y->root)->left) ? ((y->root)->left)->height : 0,
                         ((y->root)->right) ? ((y->root)->right)->height : 0);
+
+    rotations += 1;
 
     // Возврат нового корня 
     return y;
@@ -97,6 +107,23 @@ AVLTree* AVLTree::addNode(int license, int fileIndex, AVLTree* next) {
 
     return next;
 }
+
+AVLTree* AVLTree::findNode(int key, AVLTree* next)
+{
+    // Элемента нет в дереве
+    if (!next)
+        return next;
+
+    // Поиск элемента в дереве
+    if (next->getValue() > key) {
+        return findNode(key, (next->root)->left);
+    }
+    else if (next->getValue() < key) {
+        return findNode(key, (next->root)->right);
+    }
+
+    return next;
+}
     
 AVLTree* AVLTree::deleteNode(int key, AVLTree* next)
 {
@@ -124,6 +151,7 @@ AVLTree* AVLTree::deleteNode(int key, AVLTree* next)
 
             return nullptr;
         }
+
         // У узла 2 потомка
         else
         {
@@ -202,7 +230,7 @@ void AVLTree::display(int level, AVLTree* current) {
         display(level + 1, (current->root)->right);
     }
     // Вывод значения узла
-    std::cout << offset << "(" << (current->root)->license << ", " << (current->root)->fileIndex << ")" << " h: " << current->height << std::endl;
+    std::cout << offset << "(" << (current->root)->license << ", " << (current->root)->fileIndex << ")" << std::endl;
     // Отрисовка левой ветви
     if ((current->root)->left) {
         display(level + 1, (current->root)->left);
